@@ -36,3 +36,18 @@
     service:
       name: jenkins
       enabled: yes
+
+  - name: Install trivy security tool
+    apt_key: # ansible module to add key
+      url: https://aquasecurity.github.io/trivy-repo/deb/public.key
+      state: present
+
+  - name: Instlal trivy repo
+    apt_repository:
+      repo: 'deb https://aquasecurity.github.io/trivy-repo/deb jammy main'
+      state: present
+
+  - name:  Install the trivy app
+    apt:
+     name: trivy
+     state: present
